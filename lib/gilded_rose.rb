@@ -58,20 +58,13 @@ class GildedRose
 end
 
 def normal_tick
-
-  if @quality == 0
-    @days_remaining -= 1
-    return
+  if @quality != 0
+    if @days_remaining <= 0
+      @quality -= 2
+    end
+    if @days_remaining > 0
+      @quality -= 1
+    end
   end
-
-  if @days_remaining <= 0
-    @quality -= 2
-    @days_remaining -= 1
-  end
-
-  if @days_remaining > 0
-    @quality -= 1
-    @days_remaining -= 1
-  end
-
+  @days_remaining -= 1
 end
