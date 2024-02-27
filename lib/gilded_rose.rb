@@ -8,7 +8,9 @@ class GildedRose
   end
 
   def tick
-    return if @name == "Normal Item"
+    if @name == "Normal Item"
+      return normal_tick
+    end
     if @name != "Aged Brie" and @name != "Backstage passes to a TAFKAL80ETC concert"
       if @quality > 0
         if @name != "Sulfuras, Hand of Ragnaros"
@@ -53,4 +55,23 @@ class GildedRose
       end
     end
   end
+end
+
+def normal_tick
+
+  if @quality == 0
+    @days_remaining -= 1
+    return
+  end
+
+  if @days_remaining <= 0
+    @quality -= 2
+    @days_remaining -= 1
+  end
+
+  if @days_remaining > 0
+    @quality -= 1
+    @days_remaining -= 1
+  end
+
 end
