@@ -66,47 +66,28 @@ class GildedRose
 end
 
 def normal_tick
-  if @quality != 0
-    if @days_remaining <= 0
-      @quality -= 2
-    end
-    if @days_remaining > 0
-      @quality -= 1
-    end
-  end
   @days_remaining -= 1
-end
+  return if @quality == 0
+  @quality -= 1
+  @quality -= 1 if @days_remaining <= 0
 
+end
 def brie_tick
-  if @quality < 50
-    if @days_remaining <= 0
-      if @quality != 49
-        @quality += 1
-      end
-      @quality += 1
-    end
-    if @days_remaining > 0
-      @quality += 1
-    end
-  end
   @days_remaining -= 1
+  return if quality >= 50
+  @quality += 1
+  @quality += 1 if @days_remaining <= 0 && @quality < 50
+
 
 end
 def sulfuras_tick
 
 end
 def backstage_tick
-  if @quality < 50
-    @quality += 1
-    if @days_remaining <= 10
-      @quality += 1
-    end
-    if @days_remaining <= 5
-      @quality += 1
-    end
-    if @days_remaining <= 0
-      @quality = 0
-    end
-  end
   @days_remaining -= 1
+  return @quality = 0 if @days_remaining < 0
+  return             if @quality >= 50
+  @quality += 1
+  @quality += 1 if @days_remaining < 10
+  @quality += 1 if @days_remaining < 5
 end
